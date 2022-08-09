@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import Comments from "./Comments";
 import FullComment from "./FullComment";
+import getComments from "../services/getAllCommentsService";
 import NewComment from "./NewComment";
-import axios from "axios";
 
 const CommentApp = () => {
   const [comments, setComments] = useState([]);
@@ -10,36 +11,22 @@ const CommentApp = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/comments455")
-      .then((response) => {
-        setComments(response.data);
-      })
-      .catch((error) => {
-        setError(true);
-      });
+    getComments()
+      .then((res) => setComments(res.data))
+      .catch((err) => setError(true));
   }, []);
 
   const selectCommentHandler = (id) => {
     setSelectedId(id);
   };
 
-  const deleteHandler = () => {
-    axios
-      .delete(`http://localhost:3001/comments/${selectedId}`)
-      .then(() => {
-        setComments(comments.filter((comment) => comment.id !== selectedId));
-        setSelectedId(null);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   const renderComments = () => {
     let renderValue = <p>Loading...</p>;
 
-    if (error) renderValue = <p>fetching data failed !</p>;
+    if (error) {
+      renderValue = <p>Something went wrong...</p>;
+      toast.error("Something went wrong...");
+    }
 
     if (comments && !error) {
       renderValue = comments.map((comment) => (
@@ -63,7 +50,12 @@ const CommentApp = () => {
         {renderComments()}
       </section>
 
-      <FullComment selectedId={selectedId} deleteHandler={deleteHandler} />
+      <FullComment
+        setSelectedId={setSelectedId}
+        selectedId={selectedId}
+        setComments={setComments}
+        comments={comments}
+      />
       <NewComment setComments={setComments} />
     </div>
   );

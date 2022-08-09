@@ -1,5 +1,6 @@
-import axios from "axios";
 import { useState } from "react";
+import addNewComment from "../services/addNewCommentService";
+import getComments from "../services/getAllCommentsService";
 
 const NewComment = ({ setComments }) => {
   const [comment, setComment] = useState({ name: "", email: "", body: "" });
@@ -10,12 +11,14 @@ const NewComment = ({ setComments }) => {
 
   const postCommentHandler = () => {
     if (comment.name && comment.email && comment.body) {
-      axios
-        .post("http://localhost:3001/comments", { ...comment, postId: 2 })
-        .then((res) => axios.get("http://localhost:3001/comments"))
-        .then((res) => setComments(res.data));
+      addNewComment({ ...comment, postId: 2 })
+        .then((res) => getComments())
+        .then((res) => setComments(res.data))
+        .catch((err) => console.log(err));
 
-      setComment({ name: "", email: "", body: "" });
+      comment.name = "";
+      comment.email = "";
+      comment.body = "";
     } else {
       alert("Please fill all fields");
     }
