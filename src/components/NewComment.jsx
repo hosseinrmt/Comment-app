@@ -1,5 +1,6 @@
 import { useState } from "react";
 import addNewComment from "../services/addNewCommentService";
+import { toast } from "react-toastify";
 import getComments from "../services/getAllCommentsService";
 
 const NewComment = ({ setComments }) => {
@@ -20,7 +21,7 @@ const NewComment = ({ setComments }) => {
       comment.email = "";
       comment.body = "";
     } else {
-      alert("Please fill all fields");
+      toast.error("Please fill all fields");
     }
   };
 
