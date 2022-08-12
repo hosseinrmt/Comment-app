@@ -5,7 +5,6 @@ axios.defaults.baseURL = "http://localhost:3001";
 
 axios.interceptors.request.use(
   (request) => {
-    console.log(request);
     return request;
   },
   (error) => {
@@ -16,7 +15,6 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   (response) => {
-    console.log(response);
     return response;
   },
   (error) => {

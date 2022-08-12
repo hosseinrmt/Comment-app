@@ -1,31 +1,5 @@
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
 body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    padding: 1rem;
-    border-radius: 5px;
-    background-color: #e5e5e5;
-    border-bottom: 1px solid #eaeaea;
-    width: auto;
-    font-size: 20px;
-}
-
-nav ul {
-    display: flex;
-}
-
-nav ul li {
-    margin-right: 1rem;
-    list-style-type: none;
 }
 
 .navLink {

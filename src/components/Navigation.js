@@ -7,11 +7,11 @@ const items = [
 
 const Navigation = () => {
   return (
-    <nav>
-      <ul>
+    <nav className="flex items-center mb-6 p-6 text-lg bg-neutral-100 border-b-2 border-slate-900 ">
+      <ul className="flex">
         {items.map((item) => {
           return (
-            <li key={item.to}>
+            <li key={item.to} className="mr-8">
               <NavLink
                 to={item.to}
                 activeClassName="active"

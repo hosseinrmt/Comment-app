@@ -1,38 +1,42 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import deleteComment from "../services/deleteCommentSevice";
 import getOneComment from "../services/getOneCommentSevice";
 
-const FullComment = ({ setSelectedId, selectedId, comments, setComments }) => {
+const FullComment = ({ setSelectedId, comments, setComments, match }) => {
   const [comment, setComment] = useState([]);
+  const commentID = match.params.id;
 
   useEffect(() => {
-    if (selectedId) {
-      getOneComment(selectedId)
+    if (commentID) {
+      getOneComment(commentID)
         .then((res) => setComment(res.data))
         .catch();
+
+      <Link to="/comment/" />;
     }
-  }, [selectedId]);
+  }, [commentID]);
 
   const deleteHandler = async () => {
-    deleteComment(selectedId)
+    deleteComment(commentID)
       .then((res) => {
-        setComments(comments.filter((comment) => comment.id !== selectedId));
+        setComments(comments.filter((comment) => comment.id !== commentID));
         setSelectedId(null);
       })
       .catch();
   };
 
-  if (!selectedId)
+  if (!commentID)
     return (
-      <p className="bg-white md:w-[45rem] w-80 mx-auto p-4 mb-4 rounded-md text-center text-lg">
+      <p className="bg-slate-300 md:w-[45rem] w-80 mx-auto p-4 mb-4 rounded-md text-center text-lg">
         Selecet a comment to see full Detail...
       </p>
     );
 
   return (
-    <div className=" bg-white w-80 mx-auto p-3 mb-4 flex-col flex text-justify justify-between gap-2 flex-wrap rounded-lg md:w-[45rem]">
+    <div className=" bg-slate-300 w-80 mx-auto p-3 mb-4 flex-col flex text-justify justify-between gap-2 flex-wrap rounded-lg md:w-[45rem]">
       <h2 className="font-bold text-2xl">Full Comment</h2>
-      <div className="bg-blue-200 p-4 rounded-md">
+      <div className="bg-white p-4 rounded-md">
         <p className="font-semibold text-lg">Name: {comment.name}</p>
         <p className="font-semibold text-lg mb-4">Email: {comment.email}</p>
         <p>{comment.body}</p>
@@ -43,6 +47,9 @@ const FullComment = ({ setSelectedId, selectedId, comments, setComments }) => {
           delete
         </button>
       </div>
+      <Link className="m-3 " to="/">
+        Back to Home?
+      </Link>
     </div>
   );
 };

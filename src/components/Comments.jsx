@@ -4,7 +4,7 @@ const Comments = ({ id, name, email, comment, onClick }) => {
       <div
         onClick={onClick}
         key={id}
-        className="flex flex-col flex-1 p-3 rounded-md bg-blue-200 cursor-pointer"
+        className="flex flex-col flex-1 p-3 rounded-md bg-white cursor-pointer"
       >
         <p className="mb-4">{comment}</p>
         <p>

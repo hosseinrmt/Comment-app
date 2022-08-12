@@ -26,9 +26,9 @@ const NewComment = ({ setComments }) => {
   };
 
   return (
-    <div className=" bg-white w-80 mx-auto p-3 mb-4 flex-col flex text-justify justify-between gap-2 flex-wrap rounded-lg md:w-[45rem]">
+    <div className=" bg-slate-300 w-80 mx-auto p-3 mb-4 flex-col flex text-justify justify-between gap-2 flex-wrap rounded-lg md:w-[45rem]">
       <h2 className="font-bold text-2xl">Add a comment</h2>
-      <div className="bg-blue-200 p-4 flex flex-col gap-y-2 rounded-md">
+      <div className=" p-4 flex flex-col gap-y-2 rounded-md">
         <label className="font-semibold text-lg">name</label>
         <input
           onChange={changeHandler}
