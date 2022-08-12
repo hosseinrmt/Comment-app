@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import deleteComment from "../services/deleteCommentSevice";
 import getOneComment from "../services/getOneCommentSevice";
 
-const FullComment = ({ setSelectedId, comments, setComments, match }) => {
+const FullComment = ({ match, history }) => {
   const [comment, setComment] = useState([]);
   const commentID = match.params.id;
 
@@ -18,12 +18,9 @@ const FullComment = ({ setSelectedId, comments, setComments, match }) => {
   }, [commentID]);
 
   const deleteHandler = async () => {
-    deleteComment(commentID)
-      .then((res) => {
-        setComments(comments.filter((comment) => comment.id !== commentID));
-        setSelectedId(null);
-      })
-      .catch();
+    deleteComment(commentID).then((res) => {
+      history.push("/");
+    });
   };
 
   if (!commentID)

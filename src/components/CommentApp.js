@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 const CommentApp = () => {
   const [comments, setComments] = useState([]);
-  const [selectedId, setSelectedId] = useState(null);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -14,10 +13,6 @@ const CommentApp = () => {
       .then((res) => setComments(res.data))
       .catch((err) => setError(true));
   }, []);
-
-  const selectCommentHandler = (id) => {
-    setSelectedId(id);
-  };
 
   const renderComments = () => {
     let renderValue = <p>Loading...</p>;
@@ -34,7 +29,6 @@ const CommentApp = () => {
             comment={comment.body}
             name={comment.name}
             email={comment.email}
-            onClick={() => selectCommentHandler(comment.id)}
           />
         </Link>
       ));
