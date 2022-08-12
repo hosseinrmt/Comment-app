@@ -56,7 +56,6 @@ const CommentApp = () => {
         setComments={setComments}
         comments={comments}
       />
-      <NewComment setComments={setComments} />
     </div>
   );
 };
